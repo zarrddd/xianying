@@ -1,0 +1,99 @@
+{
+  "id": "003-kongque",
+  "name": { "zh": "孔雀", "en": "Peacock" },
+  "version": "0.1.0",
+  "status": "v0-draft",
+  "provenance": {
+    "plate": "003",
+    "probes": 8,
+    "extracted": "2026-07-25",
+    "method": "MEDIANCUT quantization (6 colors/image, 128px) + targeted vermilion scan (R>150,G<80,B<80); see provenance/notes.md"
+  },
+  "essence": {
+    "zh": "孔雀蓝釉色的赛璐璐世界——一整缸艳青里的墨与朱",
+    "en": "a cel-animated world glazed in peacock blue — ink and vermilion in a vat of teal"
+  },
+  "rules": { "accent2_pairing": "surface-1" },
+  "tokens": {
+    "light": {
+      "surface-1":      { "value": "#E9F4F2", "origin": "derived",  "note": "冷纸底（自实测冷白族 FFF4F4/A9D9DA 推淡；长文可读性裁定，青场降为块级）" },
+      "surface-2":      { "value": "#00A9B1", "origin": "measured", "note": "孔雀青场——世界的底色（占比 .24-.35）" },
+      "surface-3":      { "value": "#0F3233", "origin": "measured", "note": "墨青深场（夜的青）" },
+      "surface-inverse": { "value": "#00A9B1", "origin": "measured", "note": "反相底=孔雀青场" },
+      "text-primary":   { "value": "#131A1B", "origin": "derived",  "note": "墨（实测 #080302 提离纯黑）" },
+      "text-secondary": { "value": "#106B7A", "origin": "measured", "note": "深青灰（street_scene 实测）" },
+      "text-inverse":   { "value": "#131A1B", "origin": "derived",  "note": "青场上的墨字（本风格反白即落墨）" },
+      "text-on-ink":    { "value": "#131A1B", "origin": "derived",  "note": "青场上的字恒为墨——赛璐璐的字是描上去的，不是印反白" },
+      "accent-1":       { "value": "#0B7A85", "origin": "derived",  "note": "链接青（青场压暗至 AA）" },
+      "accent-2":       { "value": "#D40704", "origin": "measured", "note": "朱红——不是标点是色场（2-28%，可作整段底）" },
+      "white-1":        { "value": "#F2F7F6", "origin": "derived",  "note": "鸽白——朱红场上的字色（白鸽/云/玻璃的白）" },
+      "green-1":        { "value": "#397163", "origin": "measured", "note": "松青（树/草地）" },
+      "shadow-1":       { "value": "#072927", "origin": "measured", "note": "青影" }
+    },
+    "dark": {
+      "surface-1":      { "value": "#061718", "origin": "measured", "note": "夜青底（组级实测色；landscape/still_life 本就是夜景——本风格暗档有实测依据）" },
+      "surface-2":      { "value": "#00A9B1", "origin": "measured", "note": "孔雀青场恒定不变" },
+      "surface-3":      { "value": "#0F3233", "origin": "measured", "note": "墨青深场" },
+      "surface-inverse": { "value": "#00A9B1", "origin": "measured", "note": "反相底=青场" },
+      "text-primary":   { "value": "#DFF0EE", "origin": "derived",  "note": "冷白" },
+      "text-secondary": { "value": "#7FB9B4", "origin": "derived",  "note": "青灰" },
+      "text-inverse":   { "value": "#131A1B", "origin": "derived",  "note": "青场上的墨字" },
+      "text-on-ink":    { "value": "#131A1B", "origin": "derived",  "note": "青场上的字恒为墨——两主题不变" },
+      "accent-1":       { "value": "#2FC7CE", "origin": "derived",  "note": "夜里的青提亮" },
+      "accent-2":       { "value": "#D40704", "origin": "measured", "note": "朱红场恒定" },
+      "white-1":        { "value": "#F2F7F6", "origin": "derived",  "note": "鸽白" },
+      "green-1":        { "value": "#397163", "origin": "measured", "note": "松青" },
+      "shadow-1":       { "value": "#072927", "origin": "measured", "note": "青影" }
+    }
+  },
+  "typography": {
+    "display": {
+      "stack": "'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif",
+      "weight": 900,
+      "behavior": "利落重黑，动画标题卡腔；源图文字为招牌字（竖排红底），字体配对为 derived；CJK 零字距"
+    },
+    "body": {
+      "stack": "'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif",
+      "weight": 400,
+      "behavior": "现代无衬线正文——赛璐璐是当代的画种；行长 32-40 字，行距 1.9"
+    },
+    "utility": {
+      "stack": "ui-monospace, 'SF Mono', Menlo, monospace",
+      "behavior": "编号/日期/出处；竖排红招牌内用鸽白"
+    }
+  },
+  "texture": {
+    "principle": "同一身份，两种材料语言。赛璐璐的材料真相=平涂色场的干净与描线的利落——它的 web 面几乎不需要质感，干净即质感。",
+    "image": {
+      "reproduction": "cel animation 平涂上色，形以墨线与色块边界立形，颜色饱和通透",
+      "defects": ["无——赛璐璐追求干净；仅允许极轻的赛璐璐片透光感"]
+    },
+    "web": {
+      "allowed": [
+        "纯平色场（无噪点——干净即质感）",
+        "黑体块锚定（2px 实线边框可用，是描线不是 UI hairline）",
+        "一条竖排红招牌（writing-mode 竖排，鸽白字）",
+        "青场窗块（整块 surface-2 作 aside）"
+      ],
+      "forbidden": ["任何噪点/颗粒/做旧", "渐变", "模糊阴影", "圆角", "正文缺陷化"]
+    },
+    "forbidden_finish": ["光泽", "渐变", "3D/景深", "霓虹灯效", "照片质感"]
+  },
+  "composition": {
+    "negative_space": "0.05-0.25",
+    "grid": "整幅青场为底，黑色体块压住画面，白色（鸽/云/玻璃）提亮，朱红作情绪色场",
+    "anchor": "人物或主体以黑色体块+细节线呈现，占画面 30-70%",
+    "type_behavior": "招牌字：竖排红底白字；标题黑重压在青场上"
+  },
+  "prompt_fragment": "cel animation illustration, entire ground glazed in vivid peacock teal (#00A9B1), flat anime shading, one dominant subject anchored by solid black masses with fine linework, white accents (doves, clouds, glass) for light, vermilion red (#D40704) as an emotional color field up to 30% of canvas, optional vertical red signboard with white lettering, clean saturated flats, no gradients, no photographic texture, no neon glow, 90s-2000s anime poster mood",
+  "anti": [
+    "第三色相入场——世界只有青、墨、白、朱四元；出现紫/黄/橙即违例",
+    "青场褪色或换色——孔雀青 #00A9B1 是世界的底，不是可选项",
+    "渐变、光泽、3D、景深、霓虹灯效",
+    "噪点/颗粒/做旧滤镜——赛璐璐以干净为质感",
+    "圆角卡片+模糊阴影三件套",
+    "emoji 作装饰",
+    "纯黑 #000000 token（墨用 #131A1B，夜底用 #061718）",
+    "CJK 负字距"
+  ]
+}

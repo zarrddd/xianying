@@ -1,0 +1,256 @@
+/* ============================================================
+   油印 / Mimeo · article-face v0.1 — 排版面（真文字）
+   显影 Style #001 · tokens 源: style.json（实测值，勿手改此处漂移）
+
+   铁律（style.json texture 分栏裁定 2026-07-25）：
+   - 印刷缺陷属于图像面。此处只允许：纸感底色 / 极轻噪点(≤0.04) /
+     一处 display 装饰错位 / 墨场色块上的网点图案。正文永不缺陷化。
+   - 禁：阴影、圆角、渐变、纯黑、CJK 负字距、做旧滤镜。
+   - 红 #E2767E 是标点：只落墨场，不落裸纸。
+   - 公众号内联注意：装饰依赖伪元素与 position，内联转换丢失时
+     内容仍完整可读（装饰皆 aria-hidden / 非内容承载）。
+   ============================================================ */
+
+:root {
+  --surface-1: #EDEBE1;
+  --surface-2: #21418C;
+  --surface-3: #1C3778;
+  --surface-inverse: #21418C;
+  --text-primary: #1B1B21;
+  --text-secondary: #4A5878;
+  --text-inverse: #EDEBE1;
+  --text-on-ink: #EDEBE1;   /* 墨场上的字恒为纸色，两主题不变 */
+  --accent-1: #21418C;
+  --accent-2: #E2767E;
+  --halftone-1: #7585A0;
+  --halftone-2: #9BA0AD;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #131B36;
+    --surface-2: #1C3778;
+    --surface-3: #21418C;
+    --surface-inverse: #EDEBE1;
+    --text-primary: #EDEBE1;
+    --text-secondary: #9BA0AD;
+    --text-inverse: #1B1B21;
+    --text-on-ink: #EDEBE1;
+    --accent-1: #7B96D6;
+    --accent-2: #E2767E;
+    --halftone-1: #44557C;
+    --halftone-2: #627398;
+  }
+}
+:root[data-theme="light"] {
+  --surface-1: #EDEBE1;
+  --surface-2: #21418C;
+  --surface-3: #1C3778;
+  --surface-inverse: #21418C;
+  --text-primary: #1B1B21;
+  --text-secondary: #4A5878;
+  --text-inverse: #EDEBE1;
+  --text-on-ink: #EDEBE1;
+  --accent-1: #21418C;
+  --accent-2: #E2767E;
+  --halftone-1: #7585A0;
+  --halftone-2: #9BA0AD;
+}
+:root[data-theme="dark"] {
+  --surface-1: #131B36;
+  --surface-2: #1C3778;
+  --surface-3: #21418C;
+  --surface-inverse: #EDEBE1;
+  --text-primary: #EDEBE1;
+  --text-secondary: #9BA0AD;
+  --text-inverse: #1B1B21;
+  --text-on-ink: #EDEBE1;
+  --accent-1: #7B96D6;
+  --accent-2: #E2767E;
+  --halftone-1: #44557C;
+  --halftone-2: #627398;
+}
+
+/* ---------- 基底：纸 ---------- */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body.yy {
+  margin: 0;
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-family: 'Songti SC', 'Noto Serif SC', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.95;
+  letter-spacing: 0; /* CJK 禁负字距 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 极轻噪点覆层（web_texture.allowed #2；不透明度上限 0.04） */
+body.yy::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { background: var(--surface-2); color: var(--text-on-ink); }
+
+/* ---------- 版心 ---------- */
+.yy-page { max-width: 44rem; margin: 0 auto; padding: 0 1.4rem 5rem; }
+
+/* ---------- 报头 ---------- */
+.yy-mast {
+  overflow: hidden;               /* display 大字裁切出血的实现面 */
+  border-bottom: 3px solid var(--text-primary);
+  margin-bottom: 0.4rem;
+  padding-top: 2.2rem;
+}
+.yy-kicker {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.4rem 0.6rem;  /* 大字出血，kicker 不出血 */
+}
+.yy-mast__word {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Noto Sans SC', sans-serif;
+  font-weight: 900;
+  font-size: clamp(5.2rem, 19vw, 11rem);
+  line-height: 0.98;
+  white-space: nowrap;
+  margin: 0 -0.06em -0.07em; /* 裁切出血：宁读一半 */
+  position: relative;
+  user-select: none;
+}
+/* 一处刻意错位（web_texture.allowed #3）：仅此一处，正文永不错位 */
+.yy-mast__word::before {
+  content: attr(data-word);
+  position: absolute;
+  left: 0.035em;
+  top: 0.035em;
+  color: var(--surface-2);
+  z-index: -1;
+}
+
+.yy-title {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Noto Sans SC', sans-serif;
+  font-weight: 900;
+  font-size: 1.9rem;
+  line-height: 1.4;
+  margin: 2.6rem 0 0.4rem;
+}
+.yy-dek { color: var(--text-secondary); margin: 0 0 2.4rem; }
+
+/* ---------- 正文 ---------- */
+.yy-page p { margin: 1.35em 0; }
+.yy-page a {
+  color: var(--accent-1);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.yy-page a:hover { background: var(--surface-2); color: var(--text-on-ink); }
+
+h2.yy-h {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Noto Sans SC', sans-serif;
+  font-weight: 900;
+  font-size: 1.35rem;
+  margin: 3rem 0 1rem;
+  border-top: 1px solid var(--halftone-2);
+  padding-top: 1.2rem;
+}
+h2.yy-h > .yy-h__no {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.yy-small, figcaption {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* ---------- 墨场块（红标点唯一的合法落点） ---------- */
+.yy-block {
+  background: var(--surface-2);
+  color: var(--text-on-ink);  /* 墨上永远走纸色，勿用 text-inverse（暗色下会墨字落墨场） */
+  padding: 1.6rem 1.8rem;
+  margin: 2.2rem -1.8rem;
+}
+@media (max-width: 52rem) { .yy-block { margin: 2.2rem 0; } }
+.yy-block--halftone {
+  /* 网点：只作墨场装饰图案，不上文字（web_texture.allowed #4） */
+  background-image: radial-gradient(var(--surface-3) 1.2px, transparent 1.2px);
+  background-size: 7px 7px;
+}
+.yy-block p { margin: 0.6em 0; }
+.yy-block .yy-punct {
+  display: inline-block;
+  width: 0.62em; height: 0.62em;
+  background: var(--accent-2);   /* 红标点：≤2%，只在墨场内 */
+  margin-right: 0.5em;
+}
+.yy-quote {
+  font-size: 1.22rem;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+/* ---------- 反相段（暗景中的纸色块 / 亮景中的墨场，已由变量对调） ---------- */
+.yy-inverse {
+  background: var(--surface-inverse);
+  color: var(--text-inverse);
+  padding: 1.2rem 1.6rem;
+  margin: 2rem 0;
+}
+
+/* ---------- 色板样片 ---------- */
+.yy-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0; margin: 1.6rem 0; border: 1px solid var(--halftone-2); }
+.yy-swatch { padding: 1.1rem 0.9rem 0.9rem; min-height: 5.2rem; display: flex; flex-direction: column; justify-content: flex-end; }
+.yy-swatch b { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.72rem; font-weight: 400; display: block; }
+
+/* ---------- 图 ---------- */
+figure.yy-fig { margin: 2.2rem 0; }
+figure.yy-fig img { width: 100%; display: block; border: 1px solid var(--halftone-2); }
+figure.yy-fig figcaption { padding-top: 0.5rem; }
+
+/* ---------- 微文字织物（装饰，aria-hidden） ---------- */
+.yy-microtext {
+  column-count: 4;
+  column-gap: 1.2rem;
+  font-size: 8.5px;
+  line-height: 1.7;
+  color: var(--halftone-2);
+  text-align: justify;
+  user-select: none;
+  margin: 3.4rem 0 1rem;
+  border-top: 1px solid var(--halftone-2);
+  padding-top: 1rem;
+}
+@media (max-width: 40rem) { .yy-microtext { column-count: 2; } }
+
+/* ---------- 版记 ---------- */
+.yy-colophon {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  border-top: 3px solid var(--text-primary);
+  padding-top: 0.8rem;
+}
+
+/* ---------- 主题切换钮（specimen 用） ---------- */
+.yy-toggle {
+  position: fixed; bottom: 0.9rem; right: 0.9rem;  /* 底部角落，不压报头 kicker */
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.75rem;
+  background: var(--surface-2); color: var(--text-on-ink);
+  border: 0; padding: 0.45rem 0.8rem; cursor: pointer;
+}

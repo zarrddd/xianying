@@ -1,0 +1,14 @@
+#!/bin/sh
+# 显影泄露门 · pre-commit
+# 新增内容与文件名不得含风格码量级数字(9位以上)或矩阵名。fail-closed。
+PAT="[0-9]{9,}|auto""journey|私有""风格矩阵|private[-_ ]style[-_ ]matrix"
+if git diff --cached | grep '^+' | grep -qiE "$PAT"; then
+  echo "[GUARD] BLOCKED pre-commit: staged additions match leak pattern"
+  git diff --cached | grep '^+' | grep -inE "$PAT" | head -5
+  exit 1
+fi
+if git diff --cached --name-only | grep -qiE "$PAT"; then
+  echo "[GUARD] BLOCKED pre-commit: staged filename matches leak pattern"
+  exit 1
+fi
+exit 0

@@ -1,0 +1,213 @@
+/* ============================================================
+   水粉 / Gouache · article-face v0.1 — 排版面（真文字）
+   显影 Style #002 · tokens 源: style.json（实测值，勿手改漂移）
+   材料铁律: 水粉的 web 面=纸底/极轻纸纹/平涂色点/实色阳光影；
+   禁: 描边、渐变、模糊阴影、圆角、纯黑、CJK 负字距。
+   红(#B93F49)为自由声部可落纸(rules.accent2_pairing=surface-1)。
+   ============================================================ */
+
+:root {
+  --surface-1: #F0EBE1;
+  --surface-2: #2B5351;
+  --surface-3: #92464B;
+  --surface-inverse: #2B5351;
+  --text-primary: #3B4C4B;
+  --text-secondary: #3D6871;
+  --text-inverse: #F0EBE1;
+  --text-on-ink: #F4F0EC;
+  --accent-1: #35687F;
+  --accent-2: #B93F49;
+  --accent-3: #E2C15A;
+  --wash-1: #93BDCA;
+  --wash-2: #EBAEAB;
+  --wash-3: #D5D3C6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1E3436;
+    --surface-2: #2B5351;
+    --surface-3: #92464B;
+    --surface-inverse: #F0EBE1;
+    --text-primary: #F0EBE1;
+    --text-secondary: #A8C3C0;
+    --text-inverse: #2B4241;
+    --text-on-ink: #F0EBE1;
+    --accent-1: #8FC1D6;
+    --accent-2: #C96A72;
+    --accent-3: #E2C15A;
+    --wash-1: #4E7986;
+    --wash-2: #9E7F7D;
+    --wash-3: #5C6058;
+  }
+}
+:root[data-theme="light"] {
+  --surface-1: #F0EBE1;
+  --surface-2: #2B5351;
+  --surface-3: #92464B;
+  --surface-inverse: #2B5351;
+  --text-primary: #3B4C4B;
+  --text-secondary: #3D6871;
+  --text-inverse: #F0EBE1;
+  --text-on-ink: #F4F0EC;
+  --accent-1: #35687F;
+  --accent-2: #B93F49;
+  --accent-3: #E2C15A;
+  --wash-1: #93BDCA;
+  --wash-2: #EBAEAB;
+  --wash-3: #D5D3C6;
+}
+:root[data-theme="dark"] {
+  --surface-1: #1E3436;
+  --surface-2: #2B5351;
+  --surface-3: #92464B;
+  --surface-inverse: #F0EBE1;
+  --text-primary: #F0EBE1;
+  --text-secondary: #A8C3C0;
+  --text-inverse: #2B4241;
+  --text-on-ink: #F0EBE1;
+  --accent-1: #8FC1D6;
+  --accent-2: #C96A72;
+  --accent-3: #E2C15A;
+  --wash-1: #4E7986;
+  --wash-2: #9E7F7D;
+  --wash-3: #5C6058;
+}
+
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body.sf {
+  margin: 0;
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-family: 'Songti SC', 'Noto Serif SC', Georgia, serif;
+  font-size: 17px;
+  line-height: 2.0;
+  letter-spacing: 0; /* CJK 禁负字距 */
+  -webkit-font-smoothing: antialiased;
+}
+/* 极轻纸纹（≤0.04） */
+body.sf::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection { background: var(--surface-2); color: var(--text-on-ink); }
+
+.sf-page { max-width: 42rem; margin: 0 auto; padding: 0 1.4rem 5rem; }
+
+/* ---------- 海报头：纸上大字 + 三色圆点 + 平涂色条 ---------- */
+.sf-mast { padding: 3rem 1.4rem 0; max-width: 42rem; margin: 0 auto; }
+.sf-kicker {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.sf-mast__word {
+  font-family: 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.4rem, 11vw, 6.4rem);
+  line-height: 1.1;
+  margin: 1.2rem 0 0.8rem;
+}
+.sf-dots { display: flex; gap: 0.7rem; margin: 0.4rem 0 1.4rem; }
+.sf-dots i {
+  width: 1.05rem; height: 1.05rem; border-radius: 50%;
+  /* 圆点是本风格唯一的圆：颜料点，非 UI 圆角 */
+  display: inline-block;
+}
+.sf-dots .d1 { background: var(--accent-1); }
+.sf-dots .d2 { background: var(--surface-2); }
+.sf-dots .d3 { background: var(--accent-2); }
+.sf-dots .d4 { background: var(--accent-3); }
+.sf-bar { height: 8px; background: var(--wash-1); border: 0; margin: 0 0 2.4rem; }
+
+.sf-title {
+  font-family: 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  margin: 0 0 0.4rem;
+}
+.sf-dek { color: var(--text-secondary); margin: 0 0 2.2rem; }
+
+.sf-page p { margin: 1.3em 0; }
+.sf-page a {
+  color: var(--accent-1);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.sf-page a:hover { background: var(--surface-2); color: var(--text-on-ink); }
+
+h2.sf-h {
+  font-family: 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin: 3rem 0 1rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+h2.sf-h::before {
+  content: ""; width: 0.85rem; height: 0.85rem; border-radius: 50%;
+  background: var(--accent-2); flex: none;
+}
+h2.sf-h:nth-of-type(2n)::before { background: var(--accent-1); }
+h2.sf-h:nth-of-type(3n)::before { background: var(--accent-3); }
+.sf-h__no {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.78rem; font-weight: 400; color: var(--text-secondary);
+}
+
+.sf-small, figcaption {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.78rem; color: var(--text-secondary);
+}
+
+/* ---------- 松绿场引块：平涂 + 砖红阳光影（实色无模糊） ---------- */
+.sf-block {
+  background: var(--surface-2);
+  color: var(--text-on-ink);
+  padding: 1.6rem 1.8rem;
+  margin: 2.4rem 0.8rem 2.4rem 0;
+  box-shadow: 10px 10px 0 var(--surface-3); /* 阳光影：实色偏移，非模糊阴影 */
+}
+.sf-block p { margin: 0.6em 0; }
+.sf-quote { font-size: 1.2rem; line-height: 1.85; font-weight: 700; }
+
+/* 反相段 */
+.sf-inverse {
+  background: var(--surface-inverse);
+  color: var(--text-inverse);
+  padding: 1.2rem 1.6rem;
+  margin: 2rem 0;
+}
+
+/* ---------- 色板样片 ---------- */
+.sf-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0; margin: 1.6rem 0; }
+.sf-swatch { padding: 1.1rem 0.9rem 0.9rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: flex-end; }
+.sf-swatch b { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.72rem; font-weight: 400; }
+
+figure.sf-fig { margin: 2.4rem 0.8rem 2.4rem 0; }
+figure.sf-fig img { width: 100%; display: block; box-shadow: 10px 10px 0 var(--wash-2); }
+figure.sf-fig figcaption { padding-top: 0.7rem; }
+
+.sf-colophon {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.78rem; color: var(--text-secondary);
+  margin-top: 3.4rem; padding-top: 1rem;
+  border-top: 8px solid var(--surface-2);
+}
+
+.sf-toggle {
+  position: fixed; bottom: 0.9rem; right: 0.9rem;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.75rem;
+  background: var(--surface-2); color: var(--text-on-ink);
+  border: 0; padding: 0.45rem 0.8rem; cursor: pointer;
+}

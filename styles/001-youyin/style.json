@@ -1,0 +1,97 @@
+{
+  "id": "001-youyin",
+  "name": { "zh": "油印", "en": "Mimeo" },
+  "version": "0.1.0",
+  "status": "v0-draft",
+  "provenance": {
+    "plate": "001",
+    "probes": 8,
+    "extracted": "2026-07-25",
+    "method": "MEDIANCUT quantization (6 colors/image, 128px) + targeted red-pixel scan (R>140, R-B>60) + darkest-5% ink scan; see provenance/notes.md"
+  },
+  "essence": {
+    "zh": "一缸蓝墨水里冲洗出来的九十年代街头记忆",
+    "en": "street memory of the nineties, developed in a single vat of blue ink"
+  },
+  "tokens": {
+    "light": {
+      "surface-1":      { "value": "#EDEBE1", "origin": "measured", "note": "暖纸白，纸的裸露 (EBE9DF/EDECE6 实测均值)" },
+      "surface-2":      { "value": "#21418C", "origin": "measured", "note": "油印蓝色块/墨场——这缸墨本身" },
+      "surface-3":      { "value": "#1C3778", "origin": "measured", "note": "深墨场变体" },
+      "text-primary":   { "value": "#1B1B21", "origin": "measured", "note": "墨黑（暗部5%实测），微冷偏" },
+      "text-secondary": { "value": "#4A5878", "origin": "derived",  "note": "网点中间调压暗至正文可读（源: 7585A0/9BA0AD）" },
+      "surface-inverse": { "value": "#21418C", "origin": "measured", "note": "反相底=墨场（text-inverse 的法定落点）" },
+      "text-inverse":   { "value": "#EDEBE1", "origin": "measured", "note": "反相底上的纸色反白" },
+      "text-on-ink":    { "value": "#EDEBE1", "origin": "measured", "note": "墨场(surface-2/3)上的字永远是纸色——两主题恒定不变" },
+      "accent-1":       { "value": "#21418C", "origin": "measured", "note": "墨即强调——单墨世界，accent 与墨同源" },
+      "accent-2":       { "value": "#E2767E", "origin": "measured", "note": "珊瑚红标点。占比 ≤2%，只落在墨场/图像上，不落裸纸（源图规律）" },
+      "halftone-1":     { "value": "#7585A0", "origin": "measured", "note": "网点中间调（深）" },
+      "halftone-2":     { "value": "#9BA0AD", "origin": "measured", "note": "网点中间调（浅）" }
+    },
+    "dark": {
+      "surface-1":      { "value": "#131B36", "origin": "derived",  "note": "深墨蓝底（禁纯黑：黑底白字=祭奠语义，用户 20260723 立法）" },
+      "surface-2":      { "value": "#1C3778", "origin": "measured", "note": "墨场" },
+      "surface-3":      { "value": "#21418C", "origin": "measured", "note": "亮墨场" },
+      "text-primary":   { "value": "#EDEBE1", "origin": "measured", "note": "纸色" },
+      "text-secondary": { "value": "#9BA0AD", "origin": "measured", "note": "网点浅调" },
+      "surface-inverse": { "value": "#EDEBE1", "origin": "measured", "note": "反相底=暗景中的纸色块（text-inverse 的法定落点）" },
+      "text-inverse":   { "value": "#1B1B21", "origin": "measured", "note": "纸色块上的墨字" },
+      "text-on-ink":    { "value": "#EDEBE1", "origin": "measured", "note": "墨场上的字永远是纸色——两主题恒定不变" },
+      "accent-1":       { "value": "#7B96D6", "origin": "derived",  "note": "墨的提亮档，暗景下的链接/高亮" },
+      "accent-2":       { "value": "#E2767E", "origin": "measured", "note": "珊瑚红标点，规则同 light" },
+      "halftone-1":     { "value": "#44557C", "origin": "measured", "note": "网点（暗景深）" },
+      "halftone-2":     { "value": "#627398", "origin": "measured", "note": "网点（暗景浅）" }
+    }
+  },
+  "typography": {
+    "display": {
+      "stack": "'Helvetica Neue', Helvetica, 'PingFang SC', 'Noto Sans SC', sans-serif",
+      "weight": 900,
+      "behavior": "超大、裁切出血、宁读一半；CJK letter-spacing 恒为 0（禁负字距）"
+    },
+    "body": {
+      "stack": "'Songti SC', 'Noto Serif SC', Georgia, serif",
+      "weight": 400,
+      "behavior": "报纸正文感；行长 32-42 字"
+    },
+    "utility": {
+      "stack": "ui-monospace, 'SF Mono', Menlo, monospace",
+      "behavior": "日期/编号/标签，打字机档案感"
+    }
+  },
+  "texture": {
+    "principle": "同一身份，两种材料语言（裁定 2026-07-25）：印刷缺陷是图像面的灵魂，硬搬进网页即廉价滤镜。两面可共享色彩角色/字体配对/留白比例/构图倾向/情绪词；不可共享缺陷。",
+    "image": {
+      "reproduction": "silkscreen/risograph 单墨印刷，平面扫描视感",
+      "defects": ["halftone 网点", "posterize 极端两档", "轻微错版 misregistration", "撕边/裁切边", "复印损耗"]
+    },
+    "web": {
+      "allowed": [
+        "纸感底色：surface-1 本身即纸，不叠扫描纹理贴图",
+        "极轻噪点：feTurbulence 数据 URI 覆层，不透明度 ≤0.04",
+        "一处刻意错位：仅限 display 装饰字的 2-3px 实色偏移副本；正文永不缺陷化",
+        "网点：仅作墨场色块的装饰图案（CSS radial-gradient），不上文字"
+      ],
+      "forbidden": ["扫描纹理贴图铺底", "撕边 PNG 边框", "做旧滤镜", "正文任何形式的缺陷化"]
+    },
+    "forbidden_finish": ["光泽", "渐变", "3D/景深", "霓虹", "干净原图（图像面）"]
+  },
+  "composition": {
+    "negative_space": "0.00-0.15",
+    "grid": "满幅密度拼贴，网格切块给秩序",
+    "anchor": "单一主体 posterize 极端对比，占画面 0.30-0.60，缩略图尺寸仍一眼可辨",
+    "type_behavior": "display 大字裁切出血；报纸微文字栏当纹理填缝"
+  },
+  "rules": { "accent2_pairing": "surface-2" },
+  "prompt_fragment": "dense full-bleed silkscreen collage poster, single ultramarine ink (#21418C) on warm aged paper, one dominant posterized high-contrast subject occupying 30-60%, surrounding tiles of halftone photos and newsprint microtext columns as texture, oversized cropped grotesque display type bleeding off the edge, slight misregistration, torn paper edges, screenprint grain, flat scanned-print look, optional tiny coral-red punctuation mark under 2% of canvas, no gradients, no gloss, no 3D, no clean photography, no empty minimalism",
+  "anti": [
+    "大面积留白（>20%）——这是密度风格，不是极简风格",
+    "第二种彩色色相（珊瑚红标点除外，且 ≤2% 面积、不落裸纸）",
+    "渐变、光泽、3D、景深、霓虹",
+    "未经印刷化处理的干净照片——一切图像必须过网点/posterize/复印损伤",
+    "圆角卡片+阴影+边框三件套（2019 后台味）",
+    "emoji 作装饰",
+    "纯黑 #000000 背景（深景一律用深墨蓝 surface-1）",
+    "CJK 负字距"
+  ]
+}

@@ -1,0 +1,8 @@
+#!/bin/sh
+# 显影泄露门 · commit-msg — 提交信息不得含码或矩阵名。fail-closed。
+PAT="[0-9]{9,}|auto""journey|私有""风格矩阵|private[-_ ]style[-_ ]matrix"
+if grep -qiE "$PAT" "$1"; then
+  echo "[GUARD] BLOCKED commit-msg: commit message matches leak pattern"
+  exit 1
+fi
+exit 0

@@ -1,0 +1,20 @@
+name: leak-scan
+# 发布后防线：任何推送/PR 都全树+全史扫描，命中即红。与本地 guards 同一套模式。
+on: [push, pull_request]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: scan working tree and full history
+        run: |
+          PAT="[0-9]{9,}|auto""journey|私有""风格矩阵|private[-_ ]style[-_ ]matrix"
+          if git grep -IinE "$PAT" -- . ; then
+            echo "::error::leak pattern found in tree"; exit 1
+          fi
+          if git log -p --format='%B' | grep -qiE "$PAT"; then
+            echo "::error::leak pattern found in history"; exit 1
+          fi
+          echo "leak-scan clean"

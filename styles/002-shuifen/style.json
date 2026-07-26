@@ -1,0 +1,101 @@
+{
+  "id": "002-shuifen",
+  "name": { "zh": "水粉", "en": "Gouache" },
+  "version": "0.1.0",
+  "status": "v0-draft",
+  "provenance": {
+    "plate": "002",
+    "probes": 8,
+    "extracted": "2026-07-25",
+    "method": "MEDIANCUT quantization (6 colors/image, 128px) + targeted yellow/pink scans; see provenance/notes.md"
+  },
+  "essence": {
+    "zh": "地中海正午的水粉写生——学校美术课颜料盒里的假日",
+    "en": "a Mediterranean noon in gouache — the holiday inside a school paint box"
+  },
+  "rules": { "accent2_pairing": "surface-1" },
+  "tokens": {
+    "light": {
+      "surface-1":      { "value": "#F0EBE1", "origin": "measured", "note": "奶油纸底（F4F0EC/F0E9DF/EFE9DF 实测均值）" },
+      "surface-2":      { "value": "#2B5351", "origin": "measured", "note": "深松绿场——本风格最重的色块（占比 .30-.31）" },
+      "surface-3":      { "value": "#92464B", "origin": "measured", "note": "砖红场变体" },
+      "surface-inverse": { "value": "#2B5351", "origin": "measured", "note": "反相底=松绿场" },
+      "text-primary":   { "value": "#3B4C4B", "origin": "measured", "note": "松墨——水粉世界没有黑，深松绿即墨" },
+      "text-secondary": { "value": "#3D6871", "origin": "measured", "note": "海蓝灰（street_scene 实测）" },
+      "text-inverse":   { "value": "#F0EBE1", "origin": "measured", "note": "松绿场上的奶油字" },
+      "text-on-ink":    { "value": "#F4F0EC", "origin": "measured", "note": "色场上的字恒为奶油纸色" },
+      "accent-1":       { "value": "#35687F", "origin": "derived",  "note": "链接海蓝（源 #427E98 压暗至 AA）" },
+      "accent-2":       { "value": "#B93F49", "origin": "measured", "note": "砖红——可落纸（裙/屋顶/果，4-23% 自由成员）" },
+      "accent-3":       { "value": "#E2C15A", "origin": "measured", "note": "阳光黄点，0.1-1.6% 的最小声部" },
+      "wash-1":         { "value": "#93BDCA", "origin": "measured", "note": "海雾蓝洗" },
+      "wash-2":         { "value": "#EBAEAB", "origin": "measured", "note": "粉墙洗（4-5% 稳定成员）" },
+      "wash-3":         { "value": "#D5D3C6", "origin": "measured", "note": "暖灰洗" }
+    },
+    "dark": {
+      "surface-1":      { "value": "#1E3436", "origin": "derived",  "note": "夜松绿底（源图全为白昼，暗档为推衍，禁纯黑）" },
+      "surface-2":      { "value": "#2B5351", "origin": "measured", "note": "松绿场" },
+      "surface-3":      { "value": "#92464B", "origin": "measured", "note": "砖红场" },
+      "surface-inverse": { "value": "#F0EBE1", "origin": "measured", "note": "夜里的纸色块" },
+      "text-primary":   { "value": "#F0EBE1", "origin": "measured", "note": "奶油纸色" },
+      "text-secondary": { "value": "#A8C3C0", "origin": "derived",  "note": "海雾蓝提亮" },
+      "text-inverse":   { "value": "#2B4241", "origin": "derived",  "note": "纸色块上的松墨" },
+      "text-on-ink":    { "value": "#F0EBE1", "origin": "measured", "note": "色场上的字恒为纸色" },
+      "accent-1":       { "value": "#8FC1D6", "origin": "derived",  "note": "夜海蓝链接" },
+      "accent-2":       { "value": "#C96A72", "origin": "derived",  "note": "夜砖红（提亮保 3:1 图形对比）" },
+      "accent-3":       { "value": "#E2C15A", "origin": "measured", "note": "阳光黄点" },
+      "wash-1":         { "value": "#4E7986", "origin": "derived",  "note": "夜海雾" },
+      "wash-2":         { "value": "#9E7F7D", "origin": "derived",  "note": "夜粉墙" },
+      "wash-3":         { "value": "#5C6058", "origin": "derived",  "note": "夜暖灰" }
+    }
+  },
+  "typography": {
+    "display": {
+      "stack": "'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif",
+      "weight": 800,
+      "behavior": "几何粗黑，旅行海报腔；源图无字，字体配对为 derived（据风格谱系推定）；CJK 零字距"
+    },
+    "body": {
+      "stack": "'Songti SC', 'Noto Serif SC', Georgia, serif",
+      "weight": 400,
+      "behavior": "图画书正文感；行长 32-40 字，行距 2.0"
+    },
+    "utility": {
+      "stack": "ui-monospace, 'SF Mono', Menlo, monospace",
+      "behavior": "编号/日期/出处"
+    }
+  },
+  "texture": {
+    "principle": "同一身份，两种材料语言。水粉的材料真相=颜料的平涂与纸的牙口，不是印刷缺陷。",
+    "image": {
+      "reproduction": "gouache 平涂，无描边，纸纹可见，颜料哑光",
+      "defects": ["纸牙颗粒", "平涂笔触边缘的轻微不匀", "颜料覆盖处的微透底"]
+    },
+    "web": {
+      "allowed": [
+        "奶油纸底色（surface-1 即纸）",
+        "极轻纸纹噪点 ≤0.04",
+        "平涂色点 motif（三色圆点，源自 street_scene 的节日圆灯）",
+        "阳光影：实色无模糊偏移块（水粉的影子是平涂的）"
+      ],
+      "forbidden": ["描边/outline（本风格无线条）", "渐变", "模糊阴影", "做旧滤镜", "正文缺陷化"]
+    },
+    "forbidden_finish": ["光泽", "渐变", "3D/景深", "霓虹", "线稿描边"]
+  },
+  "composition": {
+    "negative_space": "0.10-0.30",
+    "grid": "平涂色块拼合场景，天空/墙面给呼吸",
+    "anchor": "单一主体以纯色剪影级平涂呈现，占画面 25-50%",
+    "type_behavior": "源图无字；排版面为大标题+圆点标记的海报层级"
+  },
+  "prompt_fragment": "flat gouache poster illustration, matte opaque paint on cream paper with visible paper grain, no outlines, Mediterranean noon light as flat shadow shapes, palette of brick red (#B93F49), deep pine green (#2B5351), sea blue (#427E98), pink wall wash (#EBAEAB), tiny sunlight-yellow dots, one dominant flat subject occupying 25-50%, generous sky or wall breathing space, mid-century travel poster mood, no gradients, no gloss, no outlines, no 3D, no photographic texture",
+  "anti": [
+    "描边与线稿——水粉世界没有轮廓线，形靠色块相接",
+    "黑色——最深处是松墨 #3B4C4B，出现纯黑即违例",
+    "渐变、光泽、3D、景深、霓虹",
+    "灰调污浊——颜料必须是饱和而哑光的，脏灰即违例",
+    "圆角卡片+模糊阴影三件套",
+    "emoji 作装饰",
+    "纯黑背景（暗档用夜松绿 #1E3436）",
+    "CJK 负字距"
+  ]
+}
