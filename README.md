@@ -1,10 +1,30 @@
 # 显影 / Xianying
 
-> ⚠️ WORKING DRAFT — 未发布。工作名「显影」与风格名可在发布前否决重命名。
-
 **有出处的风格库。** 每一款 Style 都不是发明出来的，而是从一组经过八个固定探针题材反复验证的源图里**显影**出来的——附出生证：计算色板实测与提炼笔记，样图随席位更新。
 
 每周显影一款。
+
+## 样张
+
+同一套 tokens，明暗两档。下面每张图在真实页面上都是可选中的真文本——样张用风格自己的排版面（article-face）渲染它自己的介绍。图像面（prompt-face）样图随席位陆续补入。
+
+**001 油印 / Mimeo**
+
+<p>
+<img src="docs/specimens/001-youyin-light.png" width="49%" alt="油印样张 · 明"> <img src="docs/specimens/001-youyin-dark.png" width="49%" alt="油印样张 · 暗">
+</p>
+
+**002 水粉 / Gouache**
+
+<p>
+<img src="docs/specimens/002-shuifen-light.png" width="49%" alt="水粉样张 · 明"> <img src="docs/specimens/002-shuifen-dark.png" width="49%" alt="水粉样张 · 暗">
+</p>
+
+**003 孔雀 / Peacock**
+
+<p>
+<img src="docs/specimens/003-kongque-light.png" width="49%" alt="孔雀样张 · 明"> <img src="docs/specimens/003-kongque-dark.png" width="49%" alt="孔雀样张 · 暗">
+</p>
 
 ## 一款 Style 的构成（两张脸）
 
