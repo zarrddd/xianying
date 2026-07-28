@@ -4,6 +4,28 @@
 
 每周显影一款。
 
+## 快速开始
+
+```bash
+git clone https://github.com/zarrddd/xianying.git
+cd xianying
+./tools/guards/install.sh
+python3 tools/verify_style.py styles/001-youyin --stage full
+```
+
+验证成功时，末行应为：
+
+```text
+STYLE_GATE=PASS
+```
+
+使用一款 Style 时：
+
+1. 图像生成读取该目录的 `prompt-face.md`，并把你的主题填入其中的主题槽位。
+2. 中文文章排版加载 `article-face.css`；`specimen.html` 是可直接打开的完整示例。
+3. `style.json` 提供 light/dark 两套角色化 tokens，`SPIRIT.md` 规定该风格的原则与反模式。
+4. 发布或提交新 Style 前，运行 `tools/verify_style.py`；本地 hooks 与 GitHub Actions 会继续执行泄露门。
+
 ## 样张
 
 同一套 tokens，明暗两档。下面每张图在真实页面上都是可选中的真文本——样张用风格自己的排版面（article-face）渲染它自己的介绍。图像面（prompt-face）样图随席位陆续补入。
