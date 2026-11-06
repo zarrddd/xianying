@@ -24,7 +24,7 @@ STYLE_GATE=PASS
 1. 图像生成读取该目录的 `prompt-face.md`，并把你的主题填入其中的主题槽位。
 2. 中文文章排版加载 `article-face.css`；`specimen.html` 是可直接打开的完整示例。
 3. `style.json` 提供 light/dark 两套角色化 tokens，`SPIRIT.md` 规定该风格的原则与反模式。
-4. 发布或提交新 Style 前，运行 `tools/verify_style.py`；本地 hooks 与 GitHub Actions 会继续执行泄露门。
+4. 发布或提交新 Style 前，运行 `tools/verify_style.py`；本地 hooks 与 GitHub Actions 会继续执行泄露门。克隆后运行 `sh tools/guards/install.sh` 安装 hooks；pre-commit 同时调用 `tools/check_path_leaks.py` 拦截本机绝对路径（`/Users/<name>`、`/private/tmp` 等），可用 `python3 tools/check_path_leaks.py --all` 全量自检。
 
 ## 样张
 

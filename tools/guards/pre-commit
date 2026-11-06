@@ -11,4 +11,12 @@ if git diff --cached --name-only | grep -qiE "$PAT"; then
   echo "[GUARD] BLOCKED pre-commit: staged filename matches leak pattern"
   exit 1
 fi
+# 本机路径泄露门：拦截 macOS/Windows/Linux 家目录与 Claude 临时目录的绝对路径（见 tools/check_path_leaks.py）
+ROOT="$(git rev-parse --show-toplevel)"
+if [ -f "$ROOT/tools/check_path_leaks.py" ]; then
+  python3 "$ROOT/tools/check_path_leaks.py" || {
+    echo "[GUARD] BLOCKED pre-commit: staged files contain local machine paths"
+    exit 1
+  }
+fi
 exit 0
